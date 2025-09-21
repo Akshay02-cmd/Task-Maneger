@@ -10,7 +10,6 @@ app.use(express.static('public'));
 
 //routes
 app.use("/api/v1/tasks", tasks);
-
 app.get("/hello", (req, res) => {
   res.send("Welcome to the Task Manager App!");
 });
