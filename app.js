@@ -4,6 +4,7 @@ const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const NotFound = require("./middleware/not-found");
+const erroHandlerMiddleware = require("./middleware/erro-handle");
 
 //middlewares
 app.use(express.json());
@@ -16,11 +17,13 @@ app.get("/hello", (req, res) => {
   res.send("Welcome to the Task Manager App!");
 });
 
+// Error handler middleware - must come before 404
+app.use(erroHandlerMiddleware);
 // 404 middleware - must be LAST
 app.use(NotFound);
 
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
